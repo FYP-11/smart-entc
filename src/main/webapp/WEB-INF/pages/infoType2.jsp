@@ -170,6 +170,22 @@
             // Connect to MQTT broker
             client.connect(options_mqtt);
 
+            var peopleCount = $('#peopleCount');
+            peopleCount.html(("00" + ${node.peopleCount}).slice(-3) + '<span>Peoples</span>');
+
+            var activity = $('#activity');
+            switch (${node.activity}) {
+                case 0:
+                    activity.html('<span>No Students</span>No activity');
+                    break;
+                case 1:
+                    activity.html('<span>Students are presence</span>No activity');
+                    break;
+                case 2:
+                    activity.html('<span>Lecture is Going</span>Activity Happening');
+                    break;
+            }
+
         }
 
         //check if a real number
@@ -373,7 +389,7 @@
                     <div class="panel-body thumbnail">
                         <div class="top-stats-panel thumbnail">
                             <div id="peopleCount" class="mini-stat-info" style="font-size: 80px; text-align: center">
-                                005
+                                No Informations
                                 <span>Peoples</span>
                             </div>
                         </div>
@@ -393,8 +409,8 @@
                             <span class="mini-stat-icon orange"><i class="fa fa-gavel"></i></span>
 
                             <div id="activity" class="mini-stat-info">
-                                <span>Lecture In</span>
-                                Meeting Going
+                                <span>No Information</span>
+                                Forbidden
                             </div>
                         </div>
                         <div class="profile-nav alt">

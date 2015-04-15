@@ -44,7 +44,7 @@
         function drawChart() {
             data = google.visualization.arrayToDataTable([
                 ['Label', 'Value'],
-                ['\'C', 33]
+                ['\'C', ${node.temperature}]
 
             ]);
 
@@ -62,7 +62,7 @@
 
             data1 = google.visualization.arrayToDataTable([
                 ['Label', 'Value'],
-                ['%', 40]
+                ['%', ${node.humidity}]
 
             ]);
 
@@ -169,7 +169,21 @@
         function init() {
             // Connect to MQTT broker
             client.connect(options_mqtt);
+            var peopleCount = $('#peopleCount');
+            peopleCount.html(("00" + ${node.peopleCount}).slice(-3) + '<span>Peoples</span>');
 
+            var activity = $('#activity');
+            switch (${node.activity}) {
+                case 0:
+                    activity.html('<span>Lecture Out</span>No activity');
+                    break;
+                case 1:
+                    activity.html('<span>Lecture In</span>No activity');
+                    break;
+                case 3:
+                    activity.html('<span>Lecture Out</span>Meeting Going');
+                    break;
+            }
         }
 
         //check if a real number
@@ -393,8 +407,8 @@
                             <span class="mini-stat-icon orange"><i class="fa fa-gavel"></i></span>
 
                             <div id="activity" class="mini-stat-info">
-                                <span>Lecture In</span>
-                                Meeting Going
+                                <span>No Information</span>
+                                Forbidden
                             </div>
                         </div>
                         <div class="profile-nav alt">
