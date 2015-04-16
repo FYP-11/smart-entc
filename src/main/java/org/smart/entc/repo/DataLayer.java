@@ -9,6 +9,7 @@ import org.smart.entc.repo.object.Node;
 import org.smart.entc.repo.object.User;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class DataLayer {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(DBConnector.class);
@@ -17,7 +18,6 @@ public class DataLayer {
         String sql = String.format("SELECT * FROM node WHERE name=\"%s\"", name);
         return DBUtil.getNode(sql);
     }
-
 
 
     public static User getUserByName(String name) {
@@ -31,7 +31,7 @@ public class DataLayer {
         String sql = String.format("UPDATE node "
                 + "SET temperature = \"%d\", humidity = \"%d\", noise = \"%d\", light = \"%d\", people_count = \"%d\""
                 + "WHERE name = \"%s\""
-                ,node.getTemperature(),node.getHumidity(),node.getNoise(),node.getLight(),node.getPeopleCount(),node.getName());
+                , node.getTemperature(), node.getHumidity(), node.getNoise(), node.getLight(), node.getPeopleCount(), node.getName());
         try {
             result = DBUtil.sqlUpdate(con, sql);
             con.close();
@@ -40,13 +40,14 @@ public class DataLayer {
         }
         return result;
     }
+
     public static int updateNodeTemperature(Node node) {
         int result = 0;
         Connection con = DBConnector.getConnection();
         String sql = String.format("UPDATE node "
                 + "SET temperature = \"%d\""
                 + "WHERE name = \"%s\""
-                ,node.getTemperature(),node.getName());
+                , node.getTemperature(), node.getName());
         try {
             result = DBUtil.sqlUpdate(con, sql);
             con.close();
@@ -55,13 +56,14 @@ public class DataLayer {
         }
         return result;
     }
+
     public static int updateNodeHumidity(Node node) {
         int result = 0;
         Connection con = DBConnector.getConnection();
         String sql = String.format("UPDATE node "
                 + "SET humidity = \"%d\""
                 + "WHERE name = \"%s\""
-                ,node.getHumidity(),node.getName());
+                , node.getHumidity(), node.getName());
         try {
             result = DBUtil.sqlUpdate(con, sql);
             con.close();
@@ -70,13 +72,14 @@ public class DataLayer {
         }
         return result;
     }
+
     public static int updateNodeLight(Node node) {
         int result = 0;
         Connection con = DBConnector.getConnection();
         String sql = String.format("UPDATE node "
                 + "SET light = \"%d\""
                 + "WHERE name = \"%s\""
-                ,node.getLight(),node.getName());
+                , node.getLight(), node.getName());
         try {
             result = DBUtil.sqlUpdate(con, sql);
             con.close();
@@ -85,13 +88,14 @@ public class DataLayer {
         }
         return result;
     }
+
     public static int updateNodeNoise(Node node) {
         int result = 0;
         Connection con = DBConnector.getConnection();
         String sql = String.format("UPDATE node "
                 + "SET noise = \"%d\""
                 + "WHERE name = \"%s\""
-                ,node.getNoise(),node.getName());
+                , node.getNoise(), node.getName());
         try {
             result = DBUtil.sqlUpdate(con, sql);
             con.close();
@@ -100,13 +104,14 @@ public class DataLayer {
         }
         return result;
     }
+
     public static int updatePeopleCount(Node node) {
         int result = 0;
         Connection con = DBConnector.getConnection();
         String sql = String.format("UPDATE node "
                 + "SET people_count = \"%d\""
                 + "WHERE name = \"%s\""
-                ,node.getPeopleCount(),node.getName());
+                , node.getPeopleCount(), node.getName());
         try {
             result = DBUtil.sqlUpdate(con, sql);
             con.close();
@@ -115,13 +120,14 @@ public class DataLayer {
         }
         return result;
     }
+
     public static int updateActivity(Node node) {
         int result = 0;
         Connection con = DBConnector.getConnection();
         String sql = String.format("UPDATE node "
                 + "SET activity = \"%d\""
                 + "WHERE name = \"%s\""
-                ,node.getActivity(),node.getName());
+                , node.getActivity(), node.getName());
         try {
             result = DBUtil.sqlUpdate(con, sql);
             con.close();
@@ -150,7 +156,7 @@ public class DataLayer {
         int result = 0;
         String sql = String.format("INSERT INTO node (name,type)" +
                 " VALUES (\"%s\",\"%d\")"
-                , node.getName(),node.getType());
+                , node.getName(), node.getType());
         try {
             result = DBUtil.sqlUpdate(con, sql);
             con.close();
@@ -165,22 +171,7 @@ public class DataLayer {
         int result = 0;
         String sql = String.format("INSERT INTO user (name,password)" +
                 " VALUES (\"%s\",\"%s\")"
-                , user.getName(),user.getPassword());
-        try {
-            result = DBUtil.sqlUpdate(con, sql);
-            con.close();
-        } catch (SQLException e) {
-            LOGGER.error("SQLException: " + e);
-        }
-        return result;
-    }
-    public static int update(User user) {
-        int result = 0;
-        Connection con = DBConnector.getConnection();
-        String sql = String.format("UPDATE user "
-                + "SET password = \"%s\""
-                + "WHERE name = \"%s\""
-                ,user.getName(),user.getPassword());
+                , user.getName(), user.getPassword());
         try {
             result = DBUtil.sqlUpdate(con, sql);
             con.close();
@@ -190,4 +181,24 @@ public class DataLayer {
         return result;
     }
 
+    public static int update(User user) {
+        int result = 0;
+        Connection con = DBConnector.getConnection();
+        String sql = String.format("UPDATE user "
+                + "SET password = \"%s\""
+                + "WHERE name = \"%s\""
+                , user.getName(), user.getPassword());
+        try {
+            result = DBUtil.sqlUpdate(con, sql);
+            con.close();
+        } catch (SQLException e) {
+            LOGGER.error("SQLException: " + e);
+        }
+        return result;
+    }
+
+    public static List<Node> getNodeList() {
+        String sql = String.format("SELECT * FROM node");
+        return DBUtil.getNodeList(sql);
+    }
 }

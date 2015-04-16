@@ -96,13 +96,13 @@
                 <a data-toggle="dropdown" class="dropdown-toggle icon-user" href="#">
                     <!--<img alt="" src="images/avatar1_small.jpg">-->
                     <i class="fa fa-user"></i>
-                    <span class="username">Dileeka Dias</span>
+                    <span class="username">${userName}</span>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu extended logout">
                     <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
                     <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                    <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
+                    <li><a href="j_spring_security_logout"><i class="fa fa-key"></i> Log Out</a></li>
                 </ul>
             </li>
             <!-- user login dropdown end -->
@@ -227,7 +227,8 @@
                             <area shape="poly" coords="301,372,330,373,333,432,300,433,300,411" target="romm-1"
                                   href="http"/>
                             <area shape="poly" title="Jayasinge Sir's Room"
-                                  coords="337,373,354,372,368,383,369,432,336,433" target="room2" href="info?location=JayasingeSir"/>
+                                  coords="337,373,354,372,368,383,369,432,336,433" target="room2"
+                                  href="info?location=JayasingeSir"/>
                             <area shape="poly" title="1" coords="299,174,330,176,331,207,322,218,300,221"
                                   target="kk" href="http"/>
                             <area shape="poly" title="2" coords="336,174,365,176,368,220,344,220,337,210,336,208"

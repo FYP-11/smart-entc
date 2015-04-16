@@ -86,9 +86,7 @@
         //settings BEGIN
         var MQTTbroker = '192.248.10.70';  //'messagesight.demos.ibm.com';
         var MQTTport = 8000;
-        var MQTTsubTopic1 = 'Server/ENTC1'; //works with wildcard # and + topics dynamically now
-        var MQTTsubTopic2 = 'Server/ENTC2';
-        var MQTTsubTopic3 = 'Server/ENTC3';
+        var MQTTsubTopic = 'Server/${node.name}'; //works with wildcard # and + topics dynamically now
         var noOfPeople = 5;
         //settings END
 
@@ -108,9 +106,7 @@
             onSuccess: function () {
                 console.log("mqtt connected");
                 // Connection succeeded; subscribe to our topics
-                client.subscribe(MQTTsubTopic1, {qos: 1});
-                client.subscribe(MQTTsubTopic2, {qos: 1});
-                client.subscribe(MQTTsubTopic3, {qos: 1});
+                client.subscribe(MQTTsubTopic, {qos: 1});
             },
             onFailure: function (message) {
                 console.log("Connection failed, ERROR: " + message.errorMessage);
@@ -268,13 +264,13 @@
                 <a data-toggle="dropdown" class="dropdown-toggle icon-user" href="#">
                     <!--<img alt="" src="images/avatar1_small.jpg">-->
                     <i class="fa fa-user"></i>
-                    <span class="username">Dileeka Dias</span>
+                    <span class="username">${userName}</span>
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu extended logout">
                     <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
                     <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                    <li><a href="login.html"><i class="fa fa-key"></i> Log Out</a></li>
+                    <li><a href="j_spring_security_logout"><i class="fa fa-key"></i> Log Out</a></li>
                 </ul>
             </li>
             <!-- user login dropdown end -->
@@ -437,7 +433,7 @@
                     <span class="mini-stat-icon orange"><i class="fa fa-clock-o"></i></span>
 
                     <div class="mini-stat-info">
-                        <span><a href="temperature">See</a></span>
+                        <span><a href="temperature?location=${node.name}">See</a></span>
                         Temperature
                     </div>
                 </div>
@@ -447,7 +443,7 @@
                     <span class="mini-stat-icon tar"><i class="fa fa-cloud"></i></span>
 
                     <div class="mini-stat-info">
-                        <span><a href="humidity">See</a></span>
+                        <span><a href="humidity?location=${node.name}">See</a></span>
                         Humidity Variations
                     </div>
                 </div>
@@ -457,7 +453,7 @@
                     <span class="mini-stat-icon pink"><i class="fa fa-sun-o"></i></span>
 
                     <div class="mini-stat-info">
-                        <span><a href="light">See</a></span>
+                        <span><a href="light?location=${node.name}">See</a></span>
                         Light Variations
                     </div>
                 </div>
@@ -467,7 +463,7 @@
                     <span class="mini-stat-icon green"><i class="fa fa-volume-up"></i></span>
 
                     <div class="mini-stat-info">
-                        <span><a href="noise">See</a></span>
+                        <span><a href="noise?location=${node.name}">See</a></span>
                         Noise Variations
                     </div>
                 </div>
